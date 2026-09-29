@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#075b59">
+  <meta name="robots" content="noindex,nofollow">
+  <title>لوحة إدارة جمعية رباط</title>
+  <link rel="icon" href="assets/images/icon-192.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="admin-page">
+  <section class="admin-login" id="loginView">
+    <div class="login-card">
+      <img src="assets/images/logo.png" alt="شعار جمعية رباط">
+      <h1>لوحة إدارة الموقع</h1>
+      <p>الدخول مخصص للمخولين بإدارة محتوى جمعية رباط.</p>
+      <div id="loginModeNotice" class="notice info"></div>
+      <form id="loginForm">
+        <div class="field"><label for="adminUser">اسم المستخدم</label><input id="adminUser" autocomplete="username" required></div>
+        <div class="field"><label for="adminPassword">كلمة المرور</label><input id="adminPassword" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-primary" type="submit">دخول آمن</button>
+        <div id="loginError" class="notice error hidden"></div>
+      </form>
+    </div>
+  </section>
+
+  <div class="admin-shell hidden" id="adminView">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand"><img src="assets/images/logo-small.png" alt="شعار جمعية رباط"><strong>إدارة جمعية رباط</strong><small id="adminModeText"></small></div>
+      <nav class="admin-nav" id="adminNav">
+        <button class="active" data-panel="dashboard">▦ لوحة المؤشرات</button>
+        <button data-panel="general">⚙ الإعدادات العامة</button>
+        <button data-panel="home">⌂ الصفحة الرئيسية</button>
+        <button data-panel="about">◉ عن الجمعية والصفحات</button>
+        <button data-panel="services">✦ الخدمات</button>
+        <button data-panel="programs">▣ البرامج والمبادرات</button>
+        <button data-panel="news">📰 الأخبار والإعلانات</button>
+        <button data-panel="requests">👥 المستفيدون والطلبات</button>
+        <button data-panel="security">🔐 الأمان والدخول</button>
+      </nav>
+      <button class="btn exit" id="logoutBtn">تسجيل الخروج</button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-top">
+        <div style="display:flex;align-items:center;gap:10px"><button class="btn btn-soft mobile-menu" id="mobileMenu">☰</button><h2 id="topTitle">لوحة المؤشرات</h2></div>
+        <div class="admin-top-actions"><span class="sync-badge" id="syncBadge">جاهز</span><a class="btn btn-outline hide-mobile" href="index.html" target="_blank">عرض الموقع ↗</a><button class="btn btn-primary" id="saveAllTop">حفظ التغييرات</button></div>
+      </header>
+
+      <div class="admin-content">
+        <section class="panel active" data-panel-view="dashboard">
+          <div class="panel-head"><div><h1>لوحة المؤشرات</h1><p>نظرة سريعة على محتوى الموقع والطلبات.</p></div><button class="btn btn-soft" id="refreshDashboard">تحديث البيانات</button></div>
+          <div class="cards"><div class="stat"><b id="statBeneficiaries">0</b><span>طلبات مستفيدين</span></div><div class="stat"><b id="statPrograms">0</b><span>برامج منشورة</span></div><div class="stat"><b id="statNews">0</b><span>أخبار وإعلانات</span></div><div class="stat"><b id="statServices">0</b><span>خدمات</span></div></div>
+          <div class="admin-card" style="margin-top:18px"><h3>حالة الإطلاق</h3><p id="launchSummary" class="small"></p><div class="notice info">يُعرض العد التنازلي في نافذة منبثقة للزوار، وتختفي تلقائيًا بعد المدة المحددة من لوحة الإدارة.</div></div>
+        </section>
+
+        <section class="panel" data-panel-view="general">
+          <div class="panel-head"><div><h1>الإعدادات العامة</h1><p>الهوية، التواصل، ومؤقت الإطلاق.</p></div></div>
+          <div class="admin-card"><h3>هوية الموقع</h3><div class="form-grid">
+            <div class="field"><label>اسم الجمعية الكامل</label><input data-bind="general.associationName"></div>
+            <div class="field"><label>الاسم المختصر في الترويسة</label><input data-bind="general.shortName"></div>
+            <div class="field full"><label>الشريط العلوي</label><input data-bind="general.topbar"></div>
+            <div class="field"><label>الموقع الجغرافي</label><input data-bind="general.locationLabel"></div>
+            <div class="field"><label>حقوق النشر</label><input data-bind="general.copyright"></div>
+            <div class="field full"><label>نص التذييل</label><textarea data-bind="general.footerText"></textarea></div>
+          </div></div>
+          <div class="admin-card"><h3>قنوات التواصل</h3><div class="form-grid">
+            <div class="field"><label>الهاتف</label><input data-bind="general.contact.phone"></div><div class="field"><label>واتساب</label><input data-bind="general.contact.whatsapp"></div>
+            <div class="field"><label>البريد الإلكتروني</label><input data-bind="general.contact.email"></div><div class="field"><label>رابط X</label><input data-bind="general.contact.x"></div>
+            <div class="field"><label>إنستغرام</label><input data-bind="general.contact.instagram"></div><div class="field"><label>يوتيوب</label><input data-bind="general.contact.youtube"></div>
+          </div></div>
+          <div class="admin-card"><h3>العد التنازلي وشاشة الإطلاق</h3><div class="form-grid">
+            <div class="field"><label>تاريخ ووقت الإطلاق</label><input type="datetime-local" id="launchDateInput"></div>
+            <div class="field"><label>مدة ظهور النافذة بالثواني</label><input type="number" min="5" max="300" data-bind="launch.popupSeconds"></div>
+            <div class="field full"><label>عنوان العد التنازلي</label><input data-bind="launch.title"></div>
+            <div class="field"><label>النص أسفل العداد</label><input data-bind="launch.dateLabel"></div>
+            <div class="field"><label>إظهار النافذة</label><select id="popupEnabled"><option value="true">مفعّلة</option><option value="false">موقوفة</option></select></div>
+            <div class="field"><label>الظهور للزائر</label><select id="showOnce"><option value="true">مرة واحدة في الجلسة</option><option value="false">مع كل تحميل للصفحة</option></select></div>
+          </div></div>
+          <div class="save-row"><button class="btn btn-primary save-content">حفظ الإعدادات</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="home">
+          <div class="panel-head"><div><h1>الصفحة الرئيسية</h1><p>تحرير النصوص الرئيسة دون تعديل الأكواد.</p></div></div>
+          <div class="admin-card"><div class="form-grid">
+            <div class="field full"><label>العبارة أعلى العنوان</label><input data-bind="home.eyebrow"></div>
+            <div class="field"><label>بداية العنوان</label><input data-bind="home.heroPrefix"></div><div class="field"><label>الكلمة المميزة</label><input data-bind="home.heroHighlight"></div>
+            <div class="field full"><label>تكملة العنوان</label><input data-bind="home.heroSuffix"></div><div class="field full"><label>الوصف الرئيسي</label><textarea data-bind="home.heroDescription"></textarea></div>
+            <div class="field"><label>زر التسجيل</label><input data-bind="home.primaryCta"></div><div class="field"><label>زر الخدمات</label><input data-bind="home.secondaryCta"></div>
+            <div class="field"><label>عنوان بطاقة الشعار</label><input data-bind="home.heroCardTitle"></div><div class="field"><label>وصف بطاقة الشعار</label><input data-bind="home.heroCardText"></div>
+            <div class="field"><label>عنوان الوصول السريع</label><input data-bind="home.quickTitle"></div><div class="field"><label>عنوان مسارات الخدمة</label><input data-bind="home.serviceTitle"></div>
+            <div class="field full"><label>وصف الوصول السريع</label><textarea data-bind="home.quickSub"></textarea></div><div class="field full"><label>وصف مسارات الخدمة</label><textarea data-bind="home.serviceSub"></textarea></div>
+            <div class="field"><label>عنوان قسم الجمهور</label><input data-bind="home.audienceTitle"></div><div class="field"><label>عنوان الشريط الختامي</label><input data-bind="home.infoTitle"></div>
+            <div class="field full"><label>وصف قسم الجمهور</label><textarea data-bind="home.audienceSub"></textarea></div><div class="field full"><label>نص الشريط الختامي</label><textarea data-bind="home.infoText"></textarea></div>
+          </div></div><div class="save-row"><button class="btn btn-primary save-content">حفظ الصفحة الرئيسية</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="about">
+          <div class="panel-head"><div><h1>عن الجمعية والصفحات</h1><p>إدارة الرؤية والرسالة والقيم ووصف الصفحات الداخلية.</p></div></div>
+          <div class="admin-card"><h3>عن الجمعية</h3><div class="form-grid">
+            <div class="field full"><label>الرؤية</label><textarea data-bind="about.vision"></textarea></div><div class="field full"><label>الرسالة</label><textarea data-bind="about.mission"></textarea></div><div class="field full"><label>القيم</label><textarea data-bind="about.values"></textarea></div>
+            <div class="field"><label>مجلس الإدارة</label><textarea data-bind="about.board"></textarea></div><div class="field"><label>الحوكمة والشفافية</label><textarea data-bind="about.governance"></textarea></div>
+            <div class="field"><label>التقارير السنوية</label><textarea data-bind="about.reports"></textarea></div><div class="field"><label>الشركاء والداعمون</label><textarea data-bind="about.partners"></textarea></div>
+          </div></div>
+          <div class="admin-card"><h3>وصف الصفحات</h3><div class="form-grid">
+            <div class="field full"><label>عن الجمعية</label><input data-bind="pages.aboutDescription"></div><div class="field full"><label>الخدمات</label><input data-bind="pages.servicesDescription"></div>
+            <div class="field full"><label>البرامج</label><input data-bind="pages.programsDescription"></div><div class="field full"><label>الأخبار</label><input data-bind="pages.newsDescription"></div>
+            <div class="field full"><label>التطوع والشراكات</label><input data-bind="pages.volunteerDescription"></div><div class="field full"><label>تسجيل المستفيدين</label><input data-bind="pages.beneficiariesDescription"></div>
+            <div class="field full"><label>تواصل معنا</label><input data-bind="pages.contactDescription"></div><div class="field full"><label>الخصوصية</label><input data-bind="pages.privacyDescription"></div>
+          </div></div><div class="save-row"><button class="btn btn-primary save-content">حفظ البيانات</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="services">
+          <div class="panel-head"><div><h1>الخدمات</h1><p>إضافة الخدمات وتعديلها وحذفها وترتيب محتواها.</p></div><button class="btn btn-soft" id="addService">+ إضافة خدمة</button></div>
+          <div class="list-editor" id="servicesEditor"></div><div class="save-row"><button class="btn btn-primary save-content">حفظ الخدمات</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="programs">
+          <div class="panel-head"><div><h1>البرامج والمبادرات</h1><p>إدارة التصنيفات والبرامج المنشورة.</p></div><button class="btn btn-soft" id="addProgram">+ إضافة برنامج</button></div>
+          <div class="admin-card"><h3>تصنيفات البرامج</h3><div class="list-editor" id="programCategoriesEditor"></div><button class="btn btn-soft add-row" id="addProgramCategory">+ إضافة تصنيف</button></div>
+          <div class="admin-card"><h3>البرامج المنشورة</h3><div class="list-editor" id="programsEditor"></div></div>
+          <div class="save-row"><button class="btn btn-primary save-content">حفظ البرامج</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="news">
+          <div class="panel-head"><div><h1>الأخبار والإعلانات</h1><p>نشر خبر أو إعلان أو فعالية وإدارته.</p></div><button class="btn btn-soft" id="addNews">+ إضافة خبر</button></div>
+          <div class="list-editor" id="newsEditor"></div><div class="save-row"><button class="btn btn-primary save-content">حفظ الأخبار</button></div>
+        </section>
+
+        <section class="panel" data-panel-view="requests">
+          <div class="panel-head"><div><h1>المستفيدون والطلبات</h1><p>عرض طلبات المستفيدين والتطوع والتواصل، مع البحث وتحديث الحالة والحذف.</p></div><button class="btn btn-soft" id="refreshRequests">↻ تحديث</button></div>
+          <div class="toolbar"><input id="requestSearch" placeholder="ابحث بالاسم أو الجوال أو التفاصيل"><select id="requestTypeFilter"><option value="">جميع الأنواع</option><option value="beneficiary">المستفيدون</option><option value="volunteer">التطوع والشراكات</option><option value="contact">التواصل</option></select><button class="btn btn-outline" id="exportRequests">تصدير CSV</button></div>
+          <div class="table-wrap"><table class="admin-table"><thead><tr><th>النوع</th><th>وقت الاستلام</th><th>الاسم</th><th>الجوال</th><th>الخدمة/الموضوع</th><th>التفاصيل</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="requestsBody"></tbody></table></div>
+        </section>
+
+        <section class="panel" data-panel-view="security">
+          <div class="panel-head"><div><h1>الأمان والدخول</h1><p>إدارة بيانات دخول لوحة التحكم.</p></div></div>
+          <div class="admin-card"><h3>تغيير بيانات الدخول</h3><div class="form-grid"><div class="field"><label>اسم المستخدم الجديد</label><input id="newAdminUser"></div><div class="field"><label>كلمة المرور الجديدة</label><input id="newAdminPassword" type="password" minlength="10"></div></div><div class="save-row"><button class="btn btn-primary" id="changeCredentials">تحديث بيانات الدخول</button></div></div>
+          <div class="notice warn" id="securityNotice"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="adminToast"></div>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site-data.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
